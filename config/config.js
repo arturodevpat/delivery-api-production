@@ -9,6 +9,12 @@ module.exports = {
     host: process.env.PGHOST,
     port: process.env.PGPORT,
     dialect: "postgres",
+     dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // Esto es necesario solo si estás usando un certificado autofirmado
+      }
+    }
   },
   production: {
     username: process.env.PGUSER,
@@ -18,5 +24,11 @@ module.exports = {
     port: process.env.PGPORT,
     dialect: "postgres",
     ssl: "require",
+     dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // Esto es necesario solo si estás usando un certificado autofirmado
+      }
+    }
   },
 };
