@@ -46,8 +46,13 @@ const sequelize = new Sequelize(
   {
     host: process.env.PGHOST,
     port: process.env.PGPORT,
-    dialect:
-      "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   }
 );
 
