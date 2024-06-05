@@ -1,5 +1,5 @@
 const express = require("express");
-const loginLimiter = require("../middleware/rateLimiter.js")
+const loginLimiter = require("../middleware/rateLimiter.js");
 const {
   registerUser,
   signUser,
@@ -8,9 +8,16 @@ const {
   registerUserValidationRules,
   signUserValidator,
 } = require("../controllers/auth.controller");
+const { uploadImage } = require("../middleware/uploadMiddleware.js");
+
 const router = express.Router();
 
-router.post("/sign-up", registerUserValidationRules(), registerUser);
+router.post(
+  "/sign-up",
+  uploadImage.single("imagen"),
+  registerUserValidationRules(),
+  registerUser
+);
 
 router.post("/sign-in", loginLimiter, signUserValidator(), signUser);
 
