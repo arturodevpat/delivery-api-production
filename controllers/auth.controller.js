@@ -46,6 +46,8 @@ const registerUser = async (req, res) => {
   const { name, lastname, email, password, phoneNumber, birthdayDate, gender } =
     req.body;
 
+  const imagenFile = req.file;
+
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -80,6 +82,7 @@ const registerUser = async (req, res) => {
       phoneNumber,
       birthdayDate,
       gender,
+      profileUrl: imagenFile.location,
     });
     return res.status(200).json({ message: "Usuario creado correctamente" });
   } catch (err) {
